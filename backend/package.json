@@ -1,0 +1,35 @@
+{
+	"name": "backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/app.ts",
+	"author": "Sufyan Dahalan",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "ts-node src/app.ts",
+		"start": "ts-node dist/app.js",
+		"build": "tsc -p ."
+	},
+	"devDependencies": {
+		"@types/jsonwebtoken": "^9.0.5",
+		"@types/node": "^20.11.7",
+		"sequelize-cli": "^6.6.2",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.3.3"
+	},
+	"nodemonConfig": {
+		"ignore": [
+			"**/test/**",
+			"**/docs/**"
+		],
+		"exec": "ts-node src/app.ts",
+		"watch": "./src/**",
+		"ext": "ts,json",
+		"verbose": true
+	},
+	"dependencies": {
+		"jsonwebtoken": "^9.0.2",
+		"sequelize": "^6.35.2",
+		"sqlite3": "^5.1.7"
+	}
+}
