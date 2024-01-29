@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import Breadcrumb from './components/Breadcrumb.vue';
+import BreadCrumb from './components/BreadCrumb.vue'
 </script>
 
 <template>
   <div class="h-full w-full px-4 lg:px-14 mx-auto">
-    <Breadcrumb />
+    <BreadCrumb />
     <RouterView class="h-full" />
   </div>
 </template>

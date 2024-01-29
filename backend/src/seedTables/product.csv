@@ -1,0 +1,5 @@
+id,name,imgUrl,brand,price,color,size,discount,sustainable,new
+1,"Stetch cotton cargo trousers",http://localhost/strech-cotton.webp,"QS by s.Oliver",59.99,"Dark Grey",29/32,43,1,0
+2,"Regular fit: linen blend trousers",http://localhost//regular-fit.webp,"QS by s.Oliver",49.99,"Deep Blue",S,48,1,0
+3,"s.Oliver print T-shirt",http://localhost/t-shirt.webp,s.Oliver,15.99,"Dark Blue",S,0,0,1
+4,"Slim: Langarmhemd mit aufgesetzter Brusttasche",http://localhost/2140657.webp,s.Oliver,39.99,Green,L,0,1,1

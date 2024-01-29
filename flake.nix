@@ -74,12 +74,11 @@ rec {
             devshell = {
               packages = with pkgsStable; [
                 nodejs_21
-                # TODO
+                nodePackages.nodemon
               ];
               startup."add precommit hooks".text = '' 
                 zsh # switch to zsh immediately
               '';
-              # ${checks.pre-commit-check.shellHook} # TODO
               name = "soliver";
               motd = ''
                 {202}🔨 Welcome to devshell of ${devshell.name} {reset}
@@ -183,12 +182,12 @@ rec {
                       description = "soliver";
                       after = [ "network.target" ];
                       wantedBy = [ "multi-user.target" ];
-                      environment = cfg.environment-variables; # TODO is this correct? is this going to leak anything to the store?
+                      environment = cfg.environment-variables; # TODO is this going to leak anything to the store?
                       serviceConfig = {
                         Type = "simple";
                         StateDirectory = "soliver";
                         DynamicUser = true;
-                        ExecStart = "${cfg.package}/bin/soliver"; # TODO make sure it works
+                        ExecStart = "${cfg.package}/bin/soliver";
                         Restart = "on-failure";
                         ProtectHome = true;
                         ProtectSystem = "strict";
@@ -207,10 +206,8 @@ rec {
                         PrivateMounts = true;
                         # TODO define stderr_logfile, stdout_logfile, and in general where the log files will be stores?
                         # TODO define autostart and autorestart?
-                        # TODO 
                       };
                     };
-                    # TODO setup postgres, in case portgres is defined in cfg.database.options
                   };
                 };
               };

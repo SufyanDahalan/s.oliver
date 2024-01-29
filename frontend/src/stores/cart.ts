@@ -1,17 +1,69 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import api from '@/api'
 
 export const useCartStore = defineStore('cart', {
   state: (): ICart => {
     return {
-      products: seedCartProducts
+      products: []
     }
   },
-  actions: {},
+  actions: {
+    async getCart() {
+      let res = await api.get('/cart/products')
+      this.products = []
+      res.data.forEach((el: any) => {
+        this.products.push({
+          brand: el.product.brand,
+          imgUrl: el.product.imgUrl,
+          name: el.product.name,
+          price: el.product.price,
+          color: el.product.color,
+          size: el.product.size,
+          id: el.product.id,
+          discount: el.product.discount,
+          sustainable: el.product.sustainable,
+          new: el.product.new,
+          quantity: el.quantity
+        })
+      })
+      this.products
+    },
+    async addRandomProduct() {
+      let res = await api.get('/cart/products/addrandom') // add a random product
+      let res1 = await this.getCart() // update products
+    },
+    async decreaseQuantity(productId: number) {
+      let res = await api.post('/cart/products/decrease/', { productId: productId })
+      let res1 = await this.getCart() // update products
+    },
+    async increaseQuantity(productId: number) {
+      let res = await api.post('/cart/products/increase/', { productId: productId })
+      let res1 = await this.getCart() // update products
+    },
+    async removeItem(productId: number) {
+      let res = await api.post('/cart/products/delete/', { productId: productId })
+      let res1 = await this.getCart() // update products
+    }
+  },
   getters: {
     getTotalPrice(): number {
       const totalPrice = this.products.reduce(
-        (accumulator: number, currentValue: IProduct) => accumulator + ((Math.round(currentValue.price * (1 - (currentValue.discount / 100))) - 0.01)), // TODO count discount in
+        (accumulator: number, currentValue: ICartProduct) =>
+          accumulator +
+          (Math.round(
+            currentValue.price * (1 - currentValue.discount / 100) * currentValue.quantity
+          ) -
+            0.01),
+        0
+      )
+      return totalPrice
+    },
+    getTotalSavings(): number {
+      const totalPrice = this.products.reduce(
+        (accumulator: number, currentValue: ICartProduct) =>
+          accumulator +
+          Math.round(currentValue.price * (currentValue.discount / 100) * currentValue.quantity),
         0
       )
       return totalPrice
@@ -24,48 +76,3 @@ export const useCartStore = defineStore('cart', {
     }
   }
 })
-
-const seedCartProducts: Array<ICartProduct> = [
-  {
-    description: 'bruh i guess they need no description',
-    brand: 'QS by s.Oliver',
-    imgUrl: '/src/assets/strech-cotton.webp',
-    name: 'Stetch cotton cargo trousers',
-    price: 59.99,
-    color: 'Dark Grey',
-    size: '29/32',
-    id: 0,
-    discount: 43,
-    sustainable: true,
-    new: false,
-    quantity: 1
-  },
-  {
-    description: 'bruh i guess they need no description',
-    brand: 'QS by s.Oliver',
-    imgUrl: '/src/assets/regular-fit.webp',
-    name: 'Regular fit: linen blend trousers',
-    price: 49.99,
-    color: 'Deep Blue',
-    size: 'S',
-    id: 1,
-    discount: 48,
-    sustainable: true,
-    new: false,
-    quantity: 1
-  },
-  {
-    description: 'bruh i guess they need no description',
-    brand: 's.Oliver',
-    imgUrl: '/src/assets/t-shirt.webp',
-    name: 's.Oliver print T-shirt',
-    price: 15.99,
-    color: 'Dark Blue',
-    size: 'S',
-    id: 2,
-    discount: 0,
-    sustainable: false,
-    new: true,
-    quantity: 1
-  }
-]

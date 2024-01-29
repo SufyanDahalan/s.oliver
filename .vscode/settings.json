@@ -1,16 +1,16 @@
 {
-    "files.associations": {
-        "*.css": "tailwindcss"
-      },
-      "editor.quickSuggestions": {
-        "strings": "on"
-      },
-      "tailwindCSS.emmetCompletions": true,
-      "emmet.triggerExpansionOnTab": true,
-      "emmet.includeLanguages": {
-        "javascript": "javascriptreact",
-        "typescript": "javascriptreact"
-      },
-      // "editor.suggest.showSnippets": false,
-      "editor.snippetSuggestions": "inline"
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "javascriptreact"
+  },
+  // "editor.suggest.showSnippets": false,
+  "editor.snippetSuggestions": "inline"
 }

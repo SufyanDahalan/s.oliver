@@ -2,7 +2,6 @@
 import TheWelcome from '@/components/TheWelcome.vue'
 import HelloWorld from '@/components/HelloWorld.vue'
 import { RouterLink } from 'vue-router'
-
 </script>
 
 <template>
